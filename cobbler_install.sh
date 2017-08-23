@@ -10,11 +10,10 @@ yum -y install createrepo httpd mkisofs mod_wsgi mod_ssl python-cheetah python-n
 # Set pxe_just_once: 1
 
 cp /usr/share/syslinux/pxelinux.0 /var/lib/cobbler/loaders/
-cp /usr/share/syslinux/chain.c32 /var/lib/tftpboot
-cp /usr/share/syslinux/vesamenu.c32 /var/lib/tftpboot
+#cp /usr/share/syslinux/chain.c32 /var/lib/tftpboot
+#cp /usr/share/syslinux/vesamenu.c32 /var/lib/tftpboot
 
-echo "ui vesamenu.c32
-PROMPT 0
+echo "PROMPT 0
 MENU TITLE Cobbler | http://cobbler.github.io/
 TIMEOUT 10
 TOTALTIMEOUT 6000
@@ -23,9 +22,8 @@ ONTIMEOUT \$pxe_timeout_profile
 LABEL local
         MENU LABEL (local)
         MENU DEFAULT
-        KERNEL chain.c32
-        APPEND hd0 0
-
+        LOCALBOOT -1
+        
 \$pxe_menu_items
 
 MENU end" > /etc/cobbler/pxe/pxedefault.template
