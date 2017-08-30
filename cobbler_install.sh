@@ -6,27 +6,29 @@ yum -y install createrepo httpd mkisofs mod_wsgi mod_ssl python-cheetah python-n
 
 # Disable Selinux in /etc/sysconfig/selinux
 # Enable TFTP in /etc/xinetd.d/tftp
-# Set current server ip in /etc/cobbler/settings
+
+# In /etc/cobbler/settings : 
+# Set server : current ip 
 # Set pxe_just_once: 1
 
 cp /usr/share/syslinux/pxelinux.0 /var/lib/cobbler/loaders/
 #cp /usr/share/syslinux/chain.c32 /var/lib/tftpboot
 #cp /usr/share/syslinux/vesamenu.c32 /var/lib/tftpboot
 
-echo "PROMPT 0
-MENU TITLE Cobbler | http://cobbler.github.io/
-TIMEOUT 10
-TOTALTIMEOUT 6000
-ONTIMEOUT \$pxe_timeout_profile
+# echo "PROMPT 0
+# MENU TITLE Cobbler | http://cobbler.github.io/
+# TIMEOUT 10
+# TOTALTIMEOUT 6000
+# ONTIMEOUT \$pxe_timeout_profile
 
-LABEL local
-        MENU LABEL (local)
-        MENU DEFAULT
-        LOCALBOOT -1
+# LABEL local
+#         MENU LABEL (local)
+#         MENU DEFAULT
+#         LOCALBOOT -1
         
-\$pxe_menu_items
+# \$pxe_menu_items
 
-MENU end" > /etc/cobbler/pxe/pxedefault.template
+# MENU end" > /etc/cobbler/pxe/pxedefault.template
 
 
 systemctl start httpd
